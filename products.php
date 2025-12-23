@@ -1,4 +1,6 @@
+
 <?php
+require_once '././config/db_mysqli.php';
 /**
  * ============================================================
  * TODO 1: CONFIGURATION INITIALE
@@ -58,6 +60,29 @@
  */
 
 // Votre code ici...
+$eror = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    $name = trim($_POST['name'] ?? '');
+    $description = trim($_POST['description'] ?? '');
+    $price = trim($_POST['price'] ?? '');
+    $quantity = trim($_POST['quantity'] ?? '');
+    if (empty($name))
+    {
+        $error = "enter your name ";
+    }
+     if (empty($pric))
+    {
+        $error = "enter price";
+    }
+    $sql = "INSERT INTO products (name, description, price, quantity) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ssii", $name, $description, $price, $quantity);
+    mysqli_stmt_execute($stmt);
+    $newId = mysqli_insert_id($conn);
+    mysqli_stmt_close($stmt);
+
+}
 
 
 
@@ -307,6 +332,22 @@
                                     <!-- FIN DE L'EXEMPLE -->
                                     
                                     <!-- Votre boucle PHP ici... -->
+                                    <php>
+                                        $sql = select name, description, price, quantity from products;
+                                         $result = $conn->query($sql);
+                                                if ($result->num_rows > 0) {
+                                               while ($row = $result->fetch_assoc()) {
+                                     $name = ($row['name'] ?? '' );
+                                      $description = ($row['description'] ?? '');
+                                       $price =($row['price'] ?? ''();
+                                        $quantity = ($row['quantity'] ?? '');
+                                     
+
+                                     );
+                                    }
+                                }
+
+                                    </php>
                                     
                                 </tbody>
                             </table>

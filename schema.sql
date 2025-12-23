@@ -4,7 +4,7 @@
 -- =============================================
 
 -- Créer la base de données
-CREATE DATABASE IF NOT EXISTS shop_db 
+CREATE DATABASE IF NOT EXISTS shop_db ;
 
 -- Utiliser la base de données
 USE shop_db;
